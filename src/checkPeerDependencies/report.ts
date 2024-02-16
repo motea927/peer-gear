@@ -1,4 +1,7 @@
 import type { Dependency } from "../packageUtils";
+import { OrderBy } from "../constants";
+import type { CliOptions } from "../types";
+import { isProblem } from "./peerDependencies";
 
 function reportPeerDependencyStatus(
   dep: Dependency,
@@ -38,4 +41,42 @@ function reportPeerDependencyStatus(
   }
 
   return logMessage("❌", `(${dep.name} is not installed)`);
+}
+
+function sortDependencies(
+  allNestedPeerDependencies: Dependency[],
+  orderBy: OrderBy,
+) {
+  if (orderBy === OrderBy.Depender) {
+    return allNestedPeerDependencies.sort((a, b) =>
+      `${a.depender}${a.name}`.localeCompare(`${b.depender}${b.name}`),
+    );
+  } else if (orderBy === OrderBy.Dependee) {
+    return allNestedPeerDependencies.sort((a, b) =>
+      `${a.name}${a.depender}`.localeCompare(`${b.name}${b.depender}`),
+    );
+  }
+  return allNestedPeerDependencies;
+}
+
+function report(options: CliOptions, allNestedPeerDependencies: Dependency[]) {
+  const sortedDependencies = sortDependencies(
+    allNestedPeerDependencies,
+    options.orderBy,
+  );
+
+  for (const dep of sortedDependencies) {
+    const relatedPeerDeps = sortedDependencies.filter(
+      (other) => other.name === dep.name && other !== dep,
+    );
+    const showIfSatisfied =
+      options.verbose || relatedPeerDeps.some((dep) => isProblem(dep));
+
+    reportPeerDependencyStatus(
+      dep,
+      options.orderBy === OrderBy.Depender,
+      showIfSatisfied,
+      options.verbose,
+    );
+  }
 }

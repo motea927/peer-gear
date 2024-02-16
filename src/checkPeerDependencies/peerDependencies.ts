@@ -10,6 +10,12 @@ import type { Resolution } from "../solution";
 import type { Dependency } from "../packageUtils";
 import type { CliOptions } from "../types";
 
+export const isProblem = (dep: Dependency) =>
+  !dep.semverSatisfies &&
+  !dep.isIgnored &&
+  !dep.isYalc &&
+  (!dep.isPeerOptionalDependency || !!dep.installedVersion);
+
 function getAllNestedPeerDependencies(options: CliOptions): Dependency[] {
   const gatheredDependencies = gatherPeerDependencies(".", options);
 
@@ -33,30 +39,4 @@ function getAllNestedPeerDependencies(options: CliOptions): Dependency[] {
   return gatheredDependencies
     .map((element) => applySemverInformation(element))
     .map((element) => applyIgnoreInformation(element));
-}
-
-function report(options: CliOptions, allNestedPeerDependencies: Dependency[]) {
-  if (options.orderBy === "depender") {
-    allNestedPeerDependencies.sort((a, b) =>
-      `${a.depender}${a.name}`.localeCompare(`${b.depender}${b.name}`),
-    );
-  } else if (options.orderBy == "dependee") {
-    allNestedPeerDependencies.sort((a, b) =>
-      `${a.name}${a.depender}`.localeCompare(`${b.name}${b.depender}`),
-    );
-  }
-
-  for (const dep of allNestedPeerDependencies) {
-    const relatedPeerDeps = allNestedPeerDependencies.filter(
-      (other) => other.name === dep.name && other !== dep,
-    );
-    const showIfSatisfied =
-      options.verbose || relatedPeerDeps.some((dep) => isProblem(dep));
-    reportPeerDependencyStatus(
-      dep,
-      options.orderBy === "depender",
-      showIfSatisfied,
-      options.verbose,
-    );
-  }
 }
