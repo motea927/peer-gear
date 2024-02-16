@@ -180,3 +180,21 @@ export function gatherPeerDependencies(
   const depArray = [...depSet].map((element) => JSON.parse(element));
   return depArray;
 }
+
+export function isSameDep(a: Dependency, b: Dependency) {
+  const keys: Array<keyof Dependency> = [
+    "name",
+    "version",
+    "installedVersion",
+    "semverSatisfies",
+    "isYalc",
+    "isPeerDevDependency",
+  ];
+
+  return (
+    keys.every((key) => a[key] === b[key]) &&
+    a.depender.name === b.depender.name &&
+    a.depender.version === b.depender.version &&
+    a.depender.packagePath === b.depender.packagePath
+  );
+}
