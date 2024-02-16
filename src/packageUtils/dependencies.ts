@@ -30,3 +30,38 @@ export function buildDependencyArray(
     };
   });
 }
+
+export function getPackageMeta(
+  packagePath: string,
+  packageJson: PackageJson,
+  isAncestorDevDependency: boolean,
+): PackageMeta {
+  const { name, version } = packageJson;
+  const packageMeta: PackageMeta = {
+    name,
+    version,
+    packagePath,
+    dependencies: [],
+    devDependencies: [],
+    optionalDependencies: [],
+    peerDependencies: [],
+  };
+
+  const dependencyTypes: Array<Dependency["type"]> = [
+    "dependencies",
+    "devDependencies",
+    "optionalDependencies",
+    "peerDependencies",
+  ];
+
+  for (const type of dependencyTypes) {
+    packageMeta[type] = buildDependencyArray(
+      type,
+      packageJson,
+      packageMeta,
+      isAncestorDevDependency,
+    );
+  }
+
+  return packageMeta;
+}

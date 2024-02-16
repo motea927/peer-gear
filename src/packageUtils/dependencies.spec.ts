@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildDependencyArray } from "./dependencies";
+import { buildDependencyArray, getPackageMeta } from "./dependencies";
 
 import type { PackageJson, PackageMeta } from "./types";
 
@@ -32,14 +32,14 @@ describe("buildDependencyArray", () => {
       isAncestorDevDependency,
     );
 
-    expect(result).toEqual([
+    expect(result).toStrictEqual([
       {
         name: "dep1",
         type: "dependencies",
         version: "1.0.0",
         isPeerDevDependency: false,
         isPeerOptionalDependency: true,
-        depender,
+        depender: { ...depender },
       },
       {
         name: "dep2",
@@ -47,7 +47,7 @@ describe("buildDependencyArray", () => {
         version: "2.0.0",
         isPeerDevDependency: true,
         isPeerOptionalDependency: false,
-        depender,
+        depender: { ...depender },
       },
     ]);
   });
@@ -90,5 +90,82 @@ describe("buildDependencyArray", () => {
         depender,
       },
     ]);
+  });
+});
+
+describe("getPackageMeta", () => {
+  it("returns a PackageMeta object", () => {
+    const packagePath = "/path/to/package";
+    const packageJson: PackageJson = {
+      name: "test-package",
+      version: "1.0.0",
+      dependencies: {
+        "dep-package": "^1.0.0",
+      },
+      devDependencies: {
+        "dev-package": "^2.0.0",
+      },
+      optionalDependencies: {
+        "opt-package": "^3.0.0",
+      },
+      peerDependencies: {
+        "peer-package": "^4.0.0",
+      },
+      peerDependenciesMeta: {
+        "peer-package": {
+          optional: true,
+        },
+      },
+      peerDevDependencies: [],
+    };
+    const isAncestorDevDependency = false;
+
+    const packageMeta = getPackageMeta(
+      packagePath,
+      packageJson,
+      isAncestorDevDependency,
+    );
+
+    expect(packageMeta).toMatchObject({
+      name: "test-package",
+      version: "1.0.0",
+      packagePath: "/path/to/package",
+      dependencies: [
+        {
+          type: "dependencies",
+          name: "dep-package",
+          version: "^1.0.0",
+          isPeerDevDependency: false,
+          isPeerOptionalDependency: false,
+        },
+      ],
+      devDependencies: [
+        {
+          type: "devDependencies",
+          name: "dev-package",
+          version: "^2.0.0",
+          isPeerDevDependency: false,
+          isPeerOptionalDependency: false,
+        },
+      ],
+      optionalDependencies: [
+        {
+          type: "optionalDependencies",
+          name: "opt-package",
+          version: "^3.0.0",
+          isPeerDevDependency: false,
+          isPeerOptionalDependency: false,
+        },
+      ],
+      peerDependencies: [
+        {
+          type: "peerDependencies",
+          name: "peer-package",
+          version: "^4.0.0",
+          isPeerDevDependency: false,
+          isPeerOptionalDependency: true,
+        },
+      ],
+    });
   });
 });
