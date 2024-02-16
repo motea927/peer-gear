@@ -1,6 +1,6 @@
 import yargs from "yargs/yargs";
 import { OrderBy } from "./constants";
-// import { checkPeerDependencies } from "./checkPeerDependencies";
+import { checkPeerDependencies } from "./checkPeerDependencies";
 import type { CliOptions } from "./types";
 
 export function getCliArgv() {
@@ -79,7 +79,7 @@ export function main() {
   if (argv.help) {
     process.exit(-2);
   }
-  // checkPeerDependencies(options);
+  checkPeerDependencies(argv);
 }
 
 main();
