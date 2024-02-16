@@ -5,7 +5,7 @@ import type { Dependency } from "./types";
 
 export function getInstalledVersion(dep: Dependency): string | undefined {
   const peerDependencyDir = resolvePackageDir(".", dep.name);
-  console.log("ggg", peerDependencyDir);
+
   if (!peerDependencyDir) {
     return undefined;
   }

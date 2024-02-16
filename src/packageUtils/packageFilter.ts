@@ -4,8 +4,6 @@ export function packageFilter() {
   return {
     getPackagePath: () => packagePath,
     filter: (pkg: Record<string, any>, pkgdir: string) => {
-      console.log("call filter", pkg);
-
       if (!packagePath || pkg.version) {
         packagePath = pkgdir;
       }
