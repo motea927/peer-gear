@@ -59,7 +59,10 @@ function sortDependencies(
   return allNestedPeerDependencies;
 }
 
-function report(options: CliOptions, allNestedPeerDependencies: Dependency[]) {
+export function report(
+  options: CliOptions,
+  allNestedPeerDependencies: Dependency[],
+) {
   const sortedDependencies = sortDependencies(
     allNestedPeerDependencies,
     options.orderBy,

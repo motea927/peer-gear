@@ -6,7 +6,7 @@ import {
   isSameDep,
 } from "../packageUtils";
 
-import type { Resolution } from "../solution";
+import type { Resolution } from "../solution/solution";
 import type { Dependency } from "../packageUtils";
 import type { CliOptions } from "../types";
 
