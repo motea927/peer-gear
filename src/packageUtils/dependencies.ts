@@ -175,10 +175,13 @@ export function gatherPeerDependencies(
   };
   walkPackageDependencyTree(packagePath, false, visitor, [], options);
 
-  // Eliminate duplicates
-  const depSet = new Set(peerDeps.map((element) => JSON.stringify(element)));
-  const depArray = [...depSet].map((element) => JSON.parse(element));
-  return depArray;
+  const uniqueDeps: Dependency[] = [];
+  for (const peerDep of peerDeps) {
+    if (!uniqueDeps.some((dep2) => isSameDep(peerDep, dep2))) {
+      uniqueDeps.push(peerDep);
+    }
+  }
+  return uniqueDeps;
 }
 
 export function isSameDep(a: Dependency, b: Dependency) {

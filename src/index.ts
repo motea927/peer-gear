@@ -81,5 +81,3 @@ export function main() {
   }
   checkPeerDependencies(argv);
 }
-
-main();

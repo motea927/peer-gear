@@ -38,6 +38,9 @@
     "test": "pnpm lint && pnpm test:types && vitest run --coverage",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
+  "bin": {
+    "peer-gear": "dist/cli.mjs"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.6",
