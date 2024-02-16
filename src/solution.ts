@@ -1,4 +1,4 @@
-import { Dependency } from "./packageUtils";
+import type { Dependency } from "./packageUtils/types";
 
 export interface Resolution {
   problem: Dependency;
