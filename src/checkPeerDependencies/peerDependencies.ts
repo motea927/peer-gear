@@ -18,7 +18,9 @@ export const isProblem = (dep: Dependency) =>
   !dep.isYalc &&
   (!dep.isPeerOptionalDependency || !!dep.installedVersion);
 
-function getAllNestedPeerDependencies(options: CliOptions): Dependency[] {
+export function getAllNestedPeerDependencies(
+  options: CliOptions,
+): Dependency[] {
   const gatheredDependencies = gatherPeerDependencies(".", options);
 
   function applySemverInformation(dep: Dependency): Dependency {
@@ -43,7 +45,7 @@ function getAllNestedPeerDependencies(options: CliOptions): Dependency[] {
     .map((element) => applyIgnoreInformation(element));
 }
 
-function findSolutions(
+export function findSolutions(
   problems: Dependency[],
   allNestedPeerDependencies: Dependency[],
 ): { resolutionsWithSolutions: Resolution[]; nosolution: Resolution[] } {
