@@ -67,10 +67,12 @@ export function getCliArgv() {
         description: "Install missing or incorrect peerDependencies",
       },
     })
-    // .option({
-    //   includePrerelease: { type: "boolean", default: false },
-    // })
-
+    .option({
+      includePrerelease: {
+        type: "boolean",
+        default: DEFAULT_VALUE.includePrerelease,
+      },
+    })
     .parseSync();
   return argv satisfies CliOptions;
 }

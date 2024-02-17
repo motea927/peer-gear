@@ -11,4 +11,5 @@ export const DEFAULT_VALUE = Object.freeze({
   runOnlyOnRootDependencies: false,
   findSolutions: false,
   install: false,
+  includePrerelease: true,
 });

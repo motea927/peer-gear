@@ -175,6 +175,7 @@ describe("findSolutions", () => {
     const { resolutionsWithSolutions, nosolution } = findSolutions(
       mockProblems,
       mockAllNestedPeerDependencies,
+      { ...DEFAULT_VALUE },
     );
 
     expect(resolutionsWithSolutions).toEqual([mockResolutions[0]]);

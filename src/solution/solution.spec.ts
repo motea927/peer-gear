@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
+import { DEFAULT_VALUE } from "../constants";
 import type { Dependency } from "../packageUtils";
 import {
   getUniqueProblems,
@@ -151,17 +152,36 @@ describe("semverReverseSort", () => {
 });
 
 describe("findPossibleResolution", () => {
-  it("should find a possible resolution for a package", () => {
+  it("should find a possible resolution for a package with pre-release", () => {
     const packageName = "dep1";
     const allPeerDeps: Dependency[] = [defaultDependency];
 
     vi.mocked(mocks.execSync).mockReturnValueOnce(
-      JSON.stringify(["2.0.1", "1.0.0", "3.0.0", "1.5.2"]),
+      JSON.stringify(["2.0.1", "1.0.0", "3.0.0", "1.5.2-beta.1"]),
     );
 
-    const resolution = findPossibleResolution(packageName, allPeerDeps);
+    const resolution = findPossibleResolution(packageName, allPeerDeps, {
+      ...DEFAULT_VALUE,
+      includePrerelease: true,
+    });
 
-    expect(resolution).toBe("1.5.2");
+    expect(resolution).toBe("1.5.2-beta.1");
+  });
+
+  it("should find a possible resolution for a package without pre-release", () => {
+    const packageName = "dep1";
+    const allPeerDeps: Dependency[] = [defaultDependency];
+
+    vi.mocked(mocks.execSync).mockReturnValueOnce(
+      JSON.stringify(["2.0.1", "1.0.0", "3.0.0", "1.5.2-beta.1"]),
+    );
+
+    const resolution = findPossibleResolution(packageName, allPeerDeps, {
+      ...DEFAULT_VALUE,
+      includePrerelease: false,
+    });
+
+    expect(resolution).toBe("1.0.0");
   });
 });
 

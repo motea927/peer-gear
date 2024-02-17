@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import semver from "semver";
 import type { Dependency } from "../packageUtils/types";
+import type { CliOptions } from "../types";
 import type { Resolution } from "./types";
 
 export function getUniqueProblems(problems: Dependency[]): Dependency[] {
@@ -39,6 +40,7 @@ export function semverReverseSort(a: string, b: string) {
 export function findPossibleResolution(
   packageName: string,
   allPeerDeps: Dependency[],
+  options: CliOptions,
 ) {
   const requiredPeerVersions = allPeerDeps.filter(
     (dep) => dep.name === packageName,
@@ -56,7 +58,7 @@ export function findPossibleResolution(
     return availableVersions.find((ver: string) =>
       requiredPeerVersions.every((peerVer) => {
         return semver.satisfies(ver, peerVer.version, {
-          includePrerelease: true,
+          includePrerelease: options.includePrerelease,
         });
       }),
     );
@@ -72,8 +74,9 @@ export function findPossibleResolution(
 export function determineResolutionVersion(
   problem: Dependency,
   allPeerDependencies: Dependency[],
+  options: CliOptions,
 ): string {
-  return findPossibleResolution(problem.name, allPeerDependencies);
+  return findPossibleResolution(problem.name, allPeerDependencies, options);
 }
 
 export function formatResolution(
@@ -86,6 +89,7 @@ export function formatResolution(
 export function findPossibleResolutions(
   problems: Dependency[],
   allPeerDependencies: Dependency[],
+  options: CliOptions,
 ): Resolution[] {
   const uniqProblems = getUniqueProblems(problems);
 
@@ -94,6 +98,7 @@ export function findPossibleResolutions(
     const resolutionVersion = determineResolutionVersion(
       problem,
       allPeerDependencies,
+      options,
     );
     const resolution = formatResolution(problem, resolutionVersion);
     return { problem, resolution, resolutionType } as Resolution;

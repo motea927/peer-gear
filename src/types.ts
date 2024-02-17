@@ -11,4 +11,5 @@ export interface CliOptions {
   orderBy: OrderBy;
   findSolutions: boolean;
   install: boolean;
+  includePrerelease: boolean;
 }

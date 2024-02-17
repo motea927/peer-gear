@@ -48,11 +48,13 @@ export function getAllNestedPeerDependencies(
 export function findSolutions(
   problems: Dependency[],
   allNestedPeerDependencies: Dependency[],
+  options: CliOptions,
 ): { resolutionsWithSolutions: Resolution[]; nosolution: Resolution[] } {
   printSearchMessage(problems.length);
   const resolutions: Resolution[] = findPossibleResolutions(
     problems,
     allNestedPeerDependencies,
+    options,
   );
   const resolutionsWithSolutions = getResolutionsWithSolutions(resolutions);
   const nosolution = getNoSolutionResolutions(resolutions);
@@ -129,6 +131,7 @@ export function checkPeerDependencies(options: CliOptions): void {
     const { nosolution, resolutionsWithSolutions } = findSolutions(
       problems,
       allNestedPeerDependencies,
+      options,
     );
     const commandLines = getCommandLines(resolutionsWithSolutions);
 
@@ -139,6 +142,7 @@ export function checkPeerDependencies(options: CliOptions): void {
     const { resolutionsWithSolutions } = findSolutions(
       problems,
       allNestedPeerDependencies,
+      options,
     );
     const commandLines = getCommandLines(resolutionsWithSolutions);
 
