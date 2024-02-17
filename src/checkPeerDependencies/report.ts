@@ -3,7 +3,7 @@ import { OrderBy } from "../constants";
 import type { CliOptions } from "../types";
 import { isProblem } from "./peerDependencies";
 
-function reportPeerDependencyStatus(
+export function reportPeerDependencyStatus(
   dep: Dependency,
   byDepender: boolean,
   showSatisfiedDep: boolean,
@@ -43,20 +43,19 @@ function reportPeerDependencyStatus(
   return logMessage("❌", `(${dep.name} is not installed)`);
 }
 
-function sortDependencies(
+export function sortDependencies(
   allNestedPeerDependencies: Dependency[],
   orderBy: OrderBy,
 ) {
+  const allNestedPeerDependenciesCopy = [...allNestedPeerDependencies];
   if (orderBy === OrderBy.Depender) {
-    return allNestedPeerDependencies.sort((a, b) =>
-      `${a.depender}${a.name}`.localeCompare(`${b.depender}${b.name}`),
+    allNestedPeerDependenciesCopy.sort((a, b) =>
+      a.depender.name.localeCompare(b.depender.name),
     );
   } else if (orderBy === OrderBy.Dependee) {
-    return allNestedPeerDependencies.sort((a, b) =>
-      `${a.name}${a.depender}`.localeCompare(`${b.name}${b.depender}`),
-    );
+    allNestedPeerDependenciesCopy.sort((a, b) => a.name.localeCompare(b.name));
   }
-  return allNestedPeerDependencies;
+  return allNestedPeerDependenciesCopy;
 }
 
 export function report(
