@@ -9,7 +9,8 @@ Forked from [check-peer-dependencies](https://github.com/christopherthielen/chec
 
 Checks the peer dependencies of the current Node.js package and offers solutions for any unmet dependencies.
 
-Note: Before proceeding, make sure to run `yarn install` to install all the necessary dependencies.
+> **Note**:
+> Before proceeding, make sure to run `yarn install` to install all the necessary dependencies.
 
 ###### Changes in this fork
 
@@ -19,7 +20,35 @@ Note: Before proceeding, make sure to run `yarn install` to install all the nece
 - Added unit tests for more robustness.
 - Added `--includePrerelease` option. Note that includePrerelease is disabled by default (WIP).
 
-## Usage (WIP)
+## Usage
+
+```bash
+npx peer-gear [--install] [--help]
+```
+
+Options:
+```
+  -h, --help                       Print usage information             [boolean]
+      --version                    Show version number                 [boolean]
+      --orderBy                    Order the output by depender or dependee
+                         [choices: "depender", "dependee"] [default: "dependee"]
+      --debug                      Print debugging information
+                                                      [boolean] [default: false]
+      --verbose                    Prints every peer dependency, even those that
+                                   are met            [boolean] [default: false]
+      --ignore                     package name to ignore (may specify multiple)
+                                                           [array] [default: []]
+      --runOnlyOnRootDependencies  Run tool only on package root dependencies
+                                                      [boolean] [default: false]
+      --findSolutions              Search for solutions and print package
+                                   installation commands
+                                                      [boolean] [default: false]
+      --install                    Install missing or incorrect peerDependencies
+                                                      [boolean] [default: false]
+      --includePrerelease          Include prerelease versions when searching
+                                   for solutions
+                                                      [boolean] [default:  true]
+```
 
 ## Development
 
