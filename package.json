@@ -31,7 +31,7 @@
     "build": "unbuild",
     "dev": "vitest dev",
     "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src",
-    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src -w",
     "prepack": "yarn build",
     "play": "jiti playground",
     "release": "yarn test && changelogen --release && npm publish && git push --follow-tags",
