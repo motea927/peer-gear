@@ -1,6 +1,36 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/motea927/peer-gear/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Refactor reportPeerDependencyStatus, fix console flow not correct ([d32e38d](https://github.com/motea927/peer-gear/commit/d32e38d))
+
+### 📖 Documentation
+
+- Add basic usage ([41f7910](https://github.com/motea927/peer-gear/commit/41f7910))
+
+### 📦 Build
+
+- Remove lint:fix test path ([de5901f](https://github.com/motea927/peer-gear/commit/de5901f))
+
+### 🏡 Chore
+
+- **release:** V0.0.2 ([a0a031a](https://github.com/motea927/peer-gear/commit/a0a031a))
+- Add PR template ([1ebfbf4](https://github.com/motea927/peer-gear/commit/1ebfbf4))
+
+### 🤖 CI
+
+- Fix lint scripts error after remove empty folder ([8b5c5fa](https://github.com/motea927/peer-gear/commit/8b5c5fa))
+- Add npx script in ci ([9bca91d](https://github.com/motea927/peer-gear/commit/9bca91d))
+
+### ❤️ Contributors
+
+- Motea927 <motea927@yahoo.com.tw>
+
 ## v0.0.2
 
 [compare changes](https://github.com/motea927/peer-gear/compare/v0.0.1...v0.0.2)
