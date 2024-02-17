@@ -32,10 +32,10 @@
     "dev": "vitest dev",
     "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
     "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
-    "prepack": "pnpm build",
+    "prepack": "yarn build",
     "play": "jiti playground",
-    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
-    "test": "pnpm lint && pnpm test:types && vitest run --coverage",
+    "release": "yarn test && changelogen --release && npm publish && git push --follow-tags",
+    "test": "yarn lint && yarn test:types && vitest run --coverage",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "bin": {
