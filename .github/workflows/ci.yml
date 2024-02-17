@@ -17,10 +17,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm lint
-      - run: pnpm test:types
-      - run: pnpm build
-      - run: pnpm vitest --coverage
+          cache: "yarn"
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test:types
+      - run: yarn build
+      - run: yarn vitest --coverage
       - uses: codecov/codecov-action@v3
