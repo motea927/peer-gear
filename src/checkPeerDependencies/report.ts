@@ -13,34 +13,41 @@ export function reportPeerDependencyStatus(
     ? `${dep.depender.name}@${dep.depender.version} requires ${dep.name} ${dep.version}`
     : `${dep.name} ${dep.version} is required by ${dep.depender.name}@${dep.depender.version}`;
 
-  const logMessage = (icon: string, suffix: string) => {
-    console.log(`  ${icon}  ${message} ${suffix}`);
-  };
+  let statusIcon = "";
+  let statusMessage = "";
 
-  if (dep.semverSatisfies && showSatisfiedDep) {
-    return logMessage("✅", `(${dep.installedVersion} is installed)`);
-  }
-
-  if (dep.isYalc) {
-    return logMessage("☑️", `(${dep.installedVersion} is installed via yalc)`);
-  }
-
-  if (dep.isIgnored && verbose) {
-    return logMessage("☑️", `IGNORED (${dep.name} is not installed)`);
-  }
-
-  if (dep.installedVersion) {
-    const suffix = dep.isPeerOptionalDependency
+  if (dep.semverSatisfies) {
+    if (!showSatisfiedDep) {
+      return;
+    }
+    statusIcon = "✅";
+    statusMessage = `(${dep.installedVersion} is installed)`;
+  } else if (dep.isYalc) {
+    statusIcon = "☑️";
+    statusMessage = `(${dep.installedVersion} is installed via yalc)`;
+  } else if (dep.isIgnored) {
+    if (!verbose) {
+      return;
+    }
+    statusIcon = "☑️";
+    statusMessage = `IGNORED (${dep.name} is not installed)`;
+  } else if (dep.installedVersion) {
+    statusIcon = "❌";
+    statusMessage = dep.isPeerOptionalDependency
       ? `OPTIONAL (${dep.installedVersion} is installed)`
       : `(${dep.installedVersion} is installed)`;
-    return logMessage("❌", suffix);
+  } else if (dep.isPeerOptionalDependency) {
+    if (!verbose) {
+      return;
+    }
+    statusIcon = "☑️";
+    statusMessage = `OPTIONAL (${dep.name} is not installed)`;
+  } else {
+    statusIcon = "❌";
+    statusMessage = `(${dep.name} is not installed)`;
   }
 
-  if (dep.isPeerOptionalDependency && verbose) {
-    return logMessage("☑️", `OPTIONAL (${dep.name} is not installed)`);
-  }
-
-  return logMessage("❌", `(${dep.name} is not installed)`);
+  console.log(`  ${statusIcon}  ${message} ${statusMessage}`);
 }
 
 export function sortDependencies(
