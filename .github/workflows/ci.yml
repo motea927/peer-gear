@@ -23,7 +23,8 @@ jobs:
       - run: yarn test:types
       - run: yarn build
       - run: yarn vitest --coverage
-      - uses: codecov/codecov-action@v4.0.1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
         env:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: motea927/peer-gear
