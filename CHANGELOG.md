@@ -1,6 +1,44 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/motea927/peer-gear/compare/v0.0.1...v0.0.2)
+
+### 🚀 Enhancements
+
+- Support includePrerelease option ([9ddcfc1](https://github.com/motea927/peer-gear/commit/9ddcfc1))
+
+### 🩹 Fixes
+
+- Added shebang to cli.ts for direct script execution ([237793c](https://github.com/motea927/peer-gear/commit/237793c))
+
+### 📖 Documentation
+
+- Add basic readme ([edb0bbb](https://github.com/motea927/peer-gear/commit/edb0bbb))
+
+### 🏡 Chore
+
+- **release:** V0.0.1 ([e8c79c9](https://github.com/motea927/peer-gear/commit/e8c79c9))
+
+### ✅ Tests
+
+- Add packageUtils & dependencies tests ([28fd72b](https://github.com/motea927/peer-gear/commit/28fd72b))
+- Add solution test ([92651a0](https://github.com/motea927/peer-gear/commit/92651a0))
+- Add report test ([13586ff](https://github.com/motea927/peer-gear/commit/13586ff))
+- Add peerDependencies test ([d8a46b5](https://github.com/motea927/peer-gear/commit/d8a46b5))
+
+### 🤖 CI
+
+- Add codecov ([a34dab3](https://github.com/motea927/peer-gear/commit/a34dab3))
+- Fix codecov ci error ([e0bbd3f](https://github.com/motea927/peer-gear/commit/e0bbd3f))
+- Check secrets exists ([8c80fa9](https://github.com/motea927/peer-gear/commit/8c80fa9))
+- Using CODECOV_TOKEN for test ([54477d7](https://github.com/motea927/peer-gear/commit/54477d7))
+
+### ❤️ Contributors
+
+- Motea927 <motea927@yahoo.com.tw>
+
 ## v0.0.1
 
 
