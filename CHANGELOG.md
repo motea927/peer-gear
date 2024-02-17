@@ -3,7 +3,7 @@
 
 ## v1.0.0
 
-[compare changes](https://github.com/motea927/peer-gear/compare/v0.0.3...v0.1.0)
+[compare changes](https://github.com/motea927/peer-gear/compare/v0.0.3...v1.0.0)
 
 ### 🚀 Enhancements
 
