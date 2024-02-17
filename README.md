@@ -5,7 +5,19 @@
 [![bundle][bundle-src]][bundle-href]
 [![Codecov][codecov-src]][codecov-href]
 
-This is my package description.
+Forked from [check-peer-dependencies](https://github.com/christopherthielen/check-peer-dependencies)
+
+Checks the peer dependencies of the current Node.js package and offers solutions for any unmet dependencies.
+
+Note: Before proceeding, make sure to run `yarn install` to install all the necessary dependencies.
+
+###### Changes in this fork
+
+- The package is renamed to `peer-gear`, allowing you to use `npx peer-gear` directly.
+- Removed npm options because `npm 7` and later versions will [automatically install peer dependencies](https://github.com/npm/rfcs/blob/main/implemented/0025-install-peer-deps.md).
+- Refactored some code to make test writing easier.
+- Added unit tests for more robustness.
+- Added `--includePrerelease` option. Note that includePrerelease is disabled by default (WIP).
 
 ## Usage (WIP)
 
@@ -13,9 +25,8 @@ This is my package description.
 
 - Clone this repository
 - Install latest LTS version of [Node.js](https://nodejs.org/en/)
-- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`
-- Install dependencies using `pnpm install`
-- Run interactive tests using `pnpm dev`
+- Install dependencies using `yarn install`
+- Run interactive tests using `yarn dev`
 
 ## License
 
