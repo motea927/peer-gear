@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.0
+
+[compare changes](https://github.com/motea927/peer-gear/compare/v0.0.3...v0.1.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Change includePrerelease default value to false ([595ae36](https://github.com/motea927/peer-gear/commit/595ae36))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Change includePrerelease default value to false ([595ae36](https://github.com/motea927/peer-gear/commit/595ae36))
+
+### ❤️ Contributors
+
+- Motea927 <motea927@yahoo.com.tw>
+
 ## v0.0.3
 
 [compare changes](https://github.com/motea927/peer-gear/compare/v0.0.2...v0.0.3)

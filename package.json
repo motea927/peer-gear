@@ -1,6 +1,6 @@
 {
   "name": "peer-gear",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Checks the peer dependencies of the current Node.js package and offers solutions for any unmet dependencies.",
   "repository": {
     "type": "git",
