@@ -22,6 +22,8 @@ jobs:
       - run: yarn lint
       - run: yarn test:types
       - run: yarn build
+      - name: Run npx for testing local build
+        run: npx --no-install peer-gear
       - run: yarn vitest --coverage
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
