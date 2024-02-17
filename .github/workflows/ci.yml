@@ -28,3 +28,5 @@ jobs:
         env:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: motea927/peer-gear
+      - name: Check if CODECOV_TOKEN exists
+        run: echo "${{ secrets.CODECOV_TOKEN }}" | wc -c
