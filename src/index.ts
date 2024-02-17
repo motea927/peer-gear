@@ -1,6 +1,7 @@
 import yargs from "yargs/yargs";
-import { OrderBy } from "./constants";
+import { OrderBy, DEFAULT_VALUE } from "./constants";
 import { checkPeerDependencies } from "./checkPeerDependencies";
+
 import type { CliOptions } from "./types";
 
 export function getCliArgv() {
@@ -18,21 +19,21 @@ export function getCliArgv() {
     .option({
       orderBy: {
         choices: [OrderBy.Dependee, OrderBy.Depender],
-        default: OrderBy.Dependee,
+        default: DEFAULT_VALUE.orderBy,
         description: "Order the output by depender or dependee",
       },
     })
     .option({
       debug: {
         boolean: true,
-        default: false,
+        default: DEFAULT_VALUE.debug,
         description: "Print debugging information",
       },
     })
     .option({
       verbose: {
         boolean: true,
-        default: false,
+        default: DEFAULT_VALUE.verbose,
         description: "Prints every peer dependency, even those that are met",
       },
     })
@@ -40,21 +41,21 @@ export function getCliArgv() {
       ignore: {
         string: true,
         array: true,
-        default: [],
+        default: DEFAULT_VALUE.ignore,
         description: "package name to ignore (may specify multiple)",
       },
     })
     .option({
       runOnlyOnRootDependencies: {
         boolean: true,
-        default: false,
+        default: DEFAULT_VALUE.runOnlyOnRootDependencies,
         description: "Run tool only on package root dependencies",
       },
     })
     .option({
       findSolutions: {
         boolean: true,
-        default: false,
+        default: DEFAULT_VALUE.findSolutions,
         description:
           "Search for solutions and print package installation commands",
       },
@@ -62,7 +63,7 @@ export function getCliArgv() {
     .option({
       install: {
         boolean: true,
-        default: false,
+        default: DEFAULT_VALUE.install,
         description: "Install missing or incorrect peerDependencies",
       },
     })

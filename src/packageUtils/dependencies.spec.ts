@@ -1,7 +1,26 @@
-import { describe, it, expect } from "vitest";
-import { buildDependencyArray, getPackageMeta } from "./dependencies";
+import { describe, it, expect, vi } from "vitest";
+import { DEFAULT_VALUE } from "../constants";
 
-import type { PackageJson, PackageMeta } from "./types";
+import {
+  buildDependencyArray,
+  getPackageMeta,
+  gatherPeerDependencies,
+  isSameDep,
+} from "./dependencies";
+
+import type { PackageJson, PackageMeta, Dependency } from "./types";
+
+const mocks = vi.hoisted(() => {
+  return {
+    walkPackageDependencyTree: vi.fn(),
+  };
+});
+
+vi.mock("./dependencyWalker", () => {
+  return {
+    walkPackageDependencyTree: mocks.walkPackageDependencyTree,
+  };
+});
 
 describe("buildDependencyArray", () => {
   it("builds an array of dependencies", () => {
@@ -167,5 +186,63 @@ describe("getPackageMeta", () => {
         },
       ],
     });
+  });
+});
+
+describe("gatherPeerDependencies", () => {
+  it("should invoke walkPackageDependencyTree once", () => {
+    gatherPeerDependencies("/test-package", DEFAULT_VALUE);
+    expect(mocks.walkPackageDependencyTree).toBeCalledTimes(1);
+  });
+});
+
+describe("isSameDep", () => {
+  it("should return true if two dependencies are the same", () => {
+    const dep1: Dependency = {
+      name: "dep1",
+      type: "dependencies",
+      version: "^1.0.0",
+      isPeerDevDependency: false,
+      isPeerOptionalDependency: false,
+      depender: {
+        name: "test-package",
+        version: "1.0.0",
+        packagePath: "/test-package",
+        dependencies: [],
+        devDependencies: [],
+        optionalDependencies: [],
+        peerDependencies: [],
+      },
+    };
+
+    const dep2: Dependency = { ...dep1 };
+
+    expect(isSameDep(dep1, dep2)).toBe(true);
+  });
+
+  it("should return false if two dependencies are not the same", () => {
+    const dep1: Dependency = {
+      name: "dep1",
+      type: "dependencies",
+      version: "^1.0.0",
+      isPeerDevDependency: false,
+      isPeerOptionalDependency: false,
+      depender: {
+        name: "test-package",
+        version: "1.0.0",
+        packagePath: "/test-package",
+        dependencies: [],
+        devDependencies: [],
+        optionalDependencies: [],
+        peerDependencies: [],
+      },
+    };
+
+    const dep2: Dependency = {
+      ...dep1,
+      name: "dep2",
+    };
+
+    expect(isSameDep(dep1, dep2)).toBe(false);
   });
 });

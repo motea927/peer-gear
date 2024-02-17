@@ -1,3 +1,4 @@
+/* v8 ignore next 999 */
 export interface PackageJson {
   name: string;
   version: string;
