@@ -39,7 +39,7 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "bin": {
-    "peer-gear": "dist/cli.mjs"
+    "peer-gear": "dist/cli.cjs"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
