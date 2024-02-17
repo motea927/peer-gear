@@ -1,12 +1,7 @@
 import { execSync } from "node:child_process";
 import semver from "semver";
 import type { Dependency } from "../packageUtils/types";
-
-export interface Resolution {
-  problem: Dependency;
-  resolution: string;
-  resolutionType: "upgrade" | "install" | "devInstall";
-}
+import type { Resolution } from "./types";
 
 export function getUniqueProblems(problems: Dependency[]): Dependency[] {
   const uniqueNames = new Set(problems.map((problem) => problem.name));
@@ -30,7 +25,7 @@ export function determineResolutionType(problem: Dependency): string {
   return "install";
 }
 
-function semverReverseSort(a: string, b: string) {
+export function semverReverseSort(a: string, b: string) {
   const lt = semver.lt(a, b);
   const gt = semver.gt(a, b);
   if (!lt && !gt) {
@@ -41,7 +36,7 @@ function semverReverseSort(a: string, b: string) {
   return -1;
 }
 
-function findPossibleResolution(
+export function findPossibleResolution(
   packageName: string,
   allPeerDeps: Dependency[],
 ) {
