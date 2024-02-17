@@ -1,4 +1,4 @@
-# ⚙️ peer-gear (WIP)
+# ⚙️ peer-gear
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -18,7 +18,7 @@ Checks the peer dependencies of the current Node.js package and offers solutions
 - Removed npm options because `npm 7` and later versions will [automatically install peer dependencies](https://github.com/npm/rfcs/blob/main/implemented/0025-install-peer-deps.md).
 - Refactored some code to make test writing easier.
 - Added unit tests for more robustness.
-- Added `--includePrerelease` option. Note that includePrerelease is disabled by default (WIP).
+- Added `--includePrerelease` option. Note that includePrerelease is disabled by default.
 
 ## Usage
 
@@ -47,7 +47,7 @@ Options:
                                                       [boolean] [default: false]
       --includePrerelease          Include prerelease versions when searching
                                    for solutions
-                                                      [boolean] [default:  true]
+                                                      [boolean] [default: false]
 ```
 
 ## Development
