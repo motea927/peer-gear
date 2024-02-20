@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.1
+
+[compare changes](https://github.com/motea927/peer-gear/compare/v1.0.0...v1.0.1)
+
+### 🩹 Fixes
+
+- Fix hint's package name not correct ([ba7b33e](https://github.com/motea927/peer-gear/commit/ba7b33e))
+
+### 🏡 Chore
+
+- Change changelog's url ([bd59dfb](https://github.com/motea927/peer-gear/commit/bd59dfb))
+
+### ❤️ Contributors
+
+- Motea927 <motea927@yahoo.com.tw>
+
 ## v1.0.0
 
 [compare changes](https://github.com/motea927/peer-gear/compare/v0.0.3...v1.0.0)
