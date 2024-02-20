@@ -161,11 +161,11 @@ export function checkPeerDependencies(options: CliOptions): void {
     console.log();
     console.log(`Search for solutions using this command:`);
     console.log();
-    console.log(`npx check-peer-dependencies --findSolutions`);
+    console.log(`npx peer-gear --findSolutions`);
     console.log();
     console.log(`Install peerDependencies using this command:`);
     console.log();
-    console.log(`npx check-peer-dependencies --install`);
+    console.log(`npx peer-gear --install`);
     console.log();
   }
 
